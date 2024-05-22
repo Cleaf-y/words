@@ -1,0 +1,34 @@
+{
+  "name": "words",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1",
+    "axios": "^1.7.1",
+    "dayjs": "^1.11.11",
+    "pinia": "^2.1.7",
+    "vue": "^3.3.4",
+    "vue-router": "4"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1",
+    "@vicons/antd": "^0.12.0",
+    "@vicons/carbon": "^0.12.0",
+    "@vicons/fa": "^0.12.0",
+    "@vicons/fluent": "^0.12.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "naive-ui": "^2.38.2",
+    "unplugin-auto-import": "^0.17.6",
+    "unplugin-vue-components": "^0.27.0",
+    "vfonts": "^0.0.3",
+    "vite": "^5.0.0"
+  }
+}
