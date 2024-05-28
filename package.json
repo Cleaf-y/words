@@ -13,7 +13,9 @@
   "dependencies": {
     "@tauri-apps/api": "^1",
     "axios": "^1.7.1",
+    "axios-tauri-api-adapter": "^0.2.1",
     "dayjs": "^1.11.11",
+    "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "vue": "^3.3.4",
     "vue-router": "4"
@@ -24,8 +26,10 @@
     "@vicons/carbon": "^0.12.0",
     "@vicons/fa": "^0.12.0",
     "@vicons/fluent": "^0.12.0",
+    "@vicons/material": "^0.12.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "naive-ui": "^2.38.2",
+    "sass": "^1.77.2",
     "unplugin-auto-import": "^0.17.6",
     "unplugin-vue-components": "^0.27.0",
     "vfonts": "^0.0.3",
