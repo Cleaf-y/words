@@ -1,5 +1,6 @@
 <script setup>
 import { useConfigStore } from "./stores/config";
+import MainWrapper from "@/components/MainWrapper.vue";
 const configStore = useConfigStore();
 </script>
 
@@ -9,9 +10,7 @@ const configStore = useConfigStore();
       <n-dialog-provider>
         <n-notification-provider>
           <n-modal-provider>
-            <n-layout class="base">
-              <router-view></router-view>
-            </n-layout>
+            <MainWrapper />
           </n-modal-provider>
         </n-notification-provider>
       </n-dialog-provider>
@@ -21,9 +20,6 @@ const configStore = useConfigStore();
 
 <style>
 .base {
-  height: 100vh;
-  width: 100vw;
-  padding: 12px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: auto;
 }
