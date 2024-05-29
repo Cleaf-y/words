@@ -19,8 +19,5 @@ const configStore = useConfigStore();
 </template>
 
 <style>
-.base {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: auto;
-}
+
 </style>
