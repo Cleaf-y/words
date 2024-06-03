@@ -10,7 +10,9 @@ const configStore = useConfigStore();
       <n-dialog-provider>
         <n-notification-provider>
           <n-modal-provider>
-            <MainWrapper />
+            <n-loading-bar-provider>
+              <MainWrapper />
+            </n-loading-bar-provider>
           </n-modal-provider>
         </n-notification-provider>
       </n-dialog-provider>
