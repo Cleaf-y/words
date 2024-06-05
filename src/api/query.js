@@ -1,6 +1,3 @@
-import axios from "axios";
-import axiosTauriApiAdapter from "axios-tauri-api-adapter";
-
 import {httpRequest} from "@/api/base.js";
 
 

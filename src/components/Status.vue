@@ -1,6 +1,4 @@
 <script setup>
-import {ref, reactive} from 'vue'
-
 import {AccessTimeOutlined, ErrorOutlineOutlined} from "@vicons/material";
 
 const props = defineProps({

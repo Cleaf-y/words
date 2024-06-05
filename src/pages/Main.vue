@@ -19,7 +19,7 @@
         </n-auto-complete>
     </div>
     <n-divider />
-    <div class="qoute-box">
+    <div class="quote-box">
       <n-space vertical>
         <n-space justify="space-between">
           <n-text type="success">每日一句</n-text>
@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted, h, onBeforeUnmount} from "vue";
+import {ref, onMounted, h} from "vue";
 import {getDailyQuote} from "@/api/qoute.js";
 import dayjs from "dayjs";
 import {SearchOutlined} from "@vicons/antd";
@@ -117,7 +117,7 @@ const wordOptions = computed(()=>{
   if (entriesList.value && entriesList.value.length===0) {
     return []
   }
-  return entriesList.value.map(((item, index)=>{
+  return entriesList.value.map((item=>{
     // return `${item.entry} ${item.explain}`
     return {
       label: item.entry,
@@ -153,11 +153,6 @@ function onSelected(val) {
   })
 }
 
-const showDropdown = ref(false)
-function setDropDownVis(val){
-  showDropdown.value = val
-}
-
 
 import {NText} from "naive-ui";
 function renderEntryList(opt) {
@@ -184,7 +179,7 @@ function renderEntryList(opt) {
   margin-top: 16px;
 }
 
-.qoute-box {
+.quote-box {
   margin-top: 16px;
   padding: 0 36px 0 36px;
 }

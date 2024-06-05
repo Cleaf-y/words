@@ -1,11 +1,11 @@
 <script setup>
-import {ref, reactive, onMounted} from 'vue'
+import {ref, reactive} from 'vue'
 import {useRouter} from "vue-router";
 const router = useRouter()
 // 图标导入
-import {RefreshOutlined, AccessTimeOutlined} from "@vicons/material";
+import {RefreshOutlined} from "@vicons/material";
 
-import Status from '@/components/Status.vue'
+
 import RelatedWord from "@/components/RelatedWord.vue";
 
 
@@ -18,11 +18,6 @@ const pageStatus = reactive({
 })
 const isShowContent = computed(()=>{
   return !pageStatus.finding && pageStatus.found
-})
-const statusCode = computed(() => {
-  if(pageStatus.finding) return 0
-  if(!pageStatus.finding && !pageStatus.found) return 1
-  return 2
 })
 
 
@@ -61,8 +56,7 @@ function generateWordRootExplanation(){
   getGPTExplanation(props.currentWord, 'root')
       .then(res => {
         let raw_data = res.data.choices[0].message.content
-        let data = getObjectFromString(raw_data)
-        wordRootInfo.value = data
+        wordRootInfo.value = getObjectFromString(raw_data)
         hasGenerated.value = true
         pageStatus.found = wordRootInfo.value.hasRoot
         pageStatus.finding = false

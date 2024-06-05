@@ -24,8 +24,7 @@ import {getCibaExplanation} from "@/api/query.js";
 onBeforeMount(async ()=>{
   try {
     const result = await getCibaExplanation(props.word)
-    const cibaInfo = result.data.pageProps.initialReduxState.word.wordInfo
-    explanation.value = cibaInfo
+    explanation.value = result.data.pageProps.initialReduxState.word.wordInfo
   } catch (e) {
     console.warn(e)
     pageData.value.finding = false
