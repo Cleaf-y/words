@@ -1,5 +1,6 @@
 <script setup>
-import {MessageOutlined, PersonOutlineOutlined} from "@vicons/material";
+import {MessageOutlined, PersonOutlineOutlined, RefreshOutlined} from "@vicons/material";
+import {NewspaperRegular} from "@vicons/fa";
 
 import { ref } from 'vue'
 const isGenerating = ref(false)
@@ -12,10 +13,10 @@ import {getObjectFromString} from "@/api/base.js";
 import {useMessage} from "naive-ui";
 const message = useMessage()
 const examples = ref([])
-async function generateSceneExamples(){
+async function generateSceneExamples(scene){
   isGenerating.value = true
   try {
-    let result = await getGPTExplanation(props.word, 'scene')
+    let result = await getGPTExplanation(props.word, scene)
     console.log(result.data)
     let res_examples = getObjectFromString(result.data.choices[0].message.content)
     res_examples.examples.forEach(item => {
@@ -35,14 +36,30 @@ async function generateSceneExamples(){
 
 <template>
   <n-flex vertical>
-    <n-flex justify="end">
-      <n-button quaternary :loading="isGenerating" :disabled="isGenerating" @click="generateSceneExamples">
+    <n-flex justify="end" size="small">
+      <n-button quaternary :disabled="isGenerating" @click="generateSceneExamples('scene')">
+        <template #icon>
+          <n-icon>
+            <RefreshOutlined />
+          </n-icon>
+        </template>
+        随机生成
+      </n-button>
+      <n-button quaternary :disabled="isGenerating" @click="generateSceneExamples('dialog')">
         <template #icon>
           <n-icon>
             <MessageOutlined />
           </n-icon>
         </template>
-        生成
+        对话
+      </n-button>
+      <n-button quaternary :disabled="isGenerating" @click="generateSceneExamples('formal')">
+        <template #icon>
+          <n-icon>
+            <NewspaperRegular />
+          </n-icon>
+        </template>
+        书面
       </n-button>
     </n-flex>
     <n-empty v-if="examples.length === 0 && !isGenerating" description="暂无例句，快去生成吧" style="margin-top: 96px;"></n-empty>
