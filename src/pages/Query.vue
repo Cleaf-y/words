@@ -4,7 +4,8 @@ import {useRoute, useRouter} from "vue-router";
 import {useLoadingBar} from "naive-ui";
 import {AccessTimeOutlined} from "@vicons/material";
 import {Speaker120Regular} from "@vicons/fluent";
-import {getExplanation, getCibaExplanation} from "@/api/query.js";
+import {getCibaExplanation} from "@/api/query.js";
+
 import WordRoot from "@/components/WordRoot.vue";
 import Derives from "@/components/Derives.vue";
 import Scenes from "@/components/Scenes.vue";
