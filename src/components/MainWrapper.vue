@@ -29,7 +29,19 @@ function handleToHome(){
   router.replace({
     name: 'Home'
   })
+  reload()
 }
+}
+
+import { inject, nextTick, provide } from "vue";
+const isRouterAlive = ref(true)
+const reload = () => {
+  isRouterAlive.value = false
+  nextTick(()=> {
+    isRouterAlive.value = true
+  })
+}
+provide('reload', reload)
 </script>
 
 <template>
@@ -54,6 +66,7 @@ function handleToHome(){
         </n-space>
       </n-space>
       <router-view />
+      <router-view v-if="isRouterAlive" :key="router.currentRoute.value.fullPath"/>
     </n-space>
 </n-layout>
 </template>
