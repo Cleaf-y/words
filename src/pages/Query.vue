@@ -100,6 +100,16 @@ function playPhonetic(isBrE){
   }
   phoneticPlayerRef.value.play()
 }
+
+
+const tabDict = {
+  "词根": tabWordRootRef
+}
+function onChangeTab(newTabName) {
+  if(tabDict[newTabName]){
+    tabDict[newTabName].value.generateWordRootExplanation()
+  }
+}
 </script>
 
 <template>
