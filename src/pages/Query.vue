@@ -1,5 +1,5 @@
 <script setup>
-import {ref, reactive, onBeforeMount} from "vue";
+import {ref, reactive, onBeforeMount, onBeforeUnmount} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {useLoadingBar} from "naive-ui";
 import {AccessTimeOutlined} from "@vicons/material";
@@ -43,7 +43,8 @@ const queryInfo = reactive({
 })
 const pageData = reactive({
   finding: true,
-  found: false
+  found: false,
+  collins: false
 })
 const basicExplanation = ref(null)
 const collinsExplanation = ref(null)
@@ -62,7 +63,6 @@ onBeforeMount(async () => {
   const data = await getCibaExplanation(word)
 
   const info = data.data.pageProps.initialReduxState.word.wordInfo.baesInfo
-  console.log(info)
   basicExplanation.value = info
   // 如果拿不到collins字段，说明走的是翻译api，没查到词
   if (info.translate_result) {
@@ -143,25 +143,27 @@ function onChangeTab(newTabName) {
         </n-scrollbar>
       </n-flex>
       <n-flex vertical id="gpt">
-        <n-tabs type="line" animated>
-          <n-tab-pane name="详解">
-            <n-space>
-              <n-scrollbar style="max-height: 400px;width: 480px;">
+        <n-empty id="no-gpt" v-if="!pageData.collins" description="暂无详解"></n-empty>
+        <n-tabs v-if="pageData.collins" type="line" animated @update:value="onChangeTab">
+          <n-tab-pane name="详解" :key="0">
+            <n-space size="small">
+              <n-scrollbar style="max-height: 400px;width: 500px;">
+                <n-text>共有 <n-text strong type="success">{{collinsExplanation[0].entry.length}}</n-text> 个义项</n-text>
                 <n-card class="cards-wrapper"
+                        size="small"
                         v-for="(item, index) in collinsExplanation[0].entry"
                         :title="`${index+1}.${item.tran}`">
                   <span v-html="item.def"></span>
                   <template #header-extra>
-                    <n-tag type="success">{{item.posp.toLowerCase()}}</n-tag>
+                    <n-tag size="small" v-if="item.posp" type="success">{{getTypeVerbose(item.posp.toLowerCase())}}</n-tag>
                   </template>
                   <br /><br />
-                  <n-collapse>
+                  <n-collapse v-if="item.example.length > 0">
                     <n-collapse-item title="例句" name="1">
                       <span v-for="e in item.example">
                         <n-text type="success">·&nbsp; {{e.ex}}</n-text>
                         <br />
-                        <n-text :depth="3"> &nbsp;&nbsp;{{e.tran}}</n-text>
-                        <br />
+                        <n-text :depth="3"> &nbsp;&nbsp;&nbsp;{{e.tran}}</n-text>
                         <br />
                       </span>
                     </n-collapse-item>
@@ -200,7 +202,7 @@ function onChangeTab(newTabName) {
 }
 
 .cards-wrapper {
-  width: 450px;
+  width: 470px;
   margin-top: 12px;
 }
 
@@ -212,5 +214,17 @@ function onChangeTab(newTabName) {
 
 #gpt {
   width: 500px;
+}
+
+#collect {
+  margin-bottom: 12px;
+}
+
+#phonetics {
+  margin-bottom: 8px;
+}
+
+#no-gpt {
+  margin-top: 150px;
 }
 </style>
