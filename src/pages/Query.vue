@@ -7,6 +7,31 @@ import {Speaker120Regular} from "@vicons/fluent";
 import {getExplanation, getCibaExplanation} from "@/api/query.js";
 
 
+const wordType = {
+  'adv': '副词',
+  'phrase': '短语',
+  'verb': '动词',
+  'n-uncount': '名词-不可数',
+  'n-sing': '名词-仅单数',
+  'n-count': '名词-可数',
+  'n-plural': '名词-仅复数',
+  'conj-coord': '连词-并列',
+  'conj-subord': '连词-从属',
+  'quest': '疑问词',
+  'adj-graded': '形容词-可比',
+  'adj': '形容词',
+  'ord': '序数词',
+  'pron': '代词',
+  'prep': '介词',
+  'n-var': '名词-可变',
+  'n-count-coll': '集合名词',
+  'n-sing-coll': '集合名词-形单',
+}
+function getTypeVerbose(originalType) {
+  // if originalType in wordType, get the type verbose, else return originalType
+  return wordType[originalType] || originalType
+}
+
 const route  = useRoute()
 const router = useRouter()
 const queryInfo = reactive({
