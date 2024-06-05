@@ -103,17 +103,19 @@ defineExpose({
     </template>
   </n-card>
   <n-scrollbar style="max-height: 450px;width: 480px;">
-    <n-card id="word-root" v-if="isShowContent" v-for="item in wordRootInfo.details" :title="item.root">
-      <n-text>{{item.rootMeaning}}</n-text>
-      <template #footer>
-        <n-flex vertical>
-          <n-text strong>其他单词</n-text>
-          <n-flex>
-            <RelatedWord v-for="word in item.relatedWords" :word="word" />
+    <n-flex size="small" vertical>
+      <n-card size="small" id="word-root" v-if="isShowContent" v-for="item in wordRootInfo.details" :title="item.root">
+        <n-text>{{item.rootMeaning}}</n-text>
+        <template #footer>
+          <n-flex vertical>
+            <n-text strong>其他单词</n-text>
+            <n-flex>
+              <RelatedWord v-for="word in item.relatedWords" :word="word" />
+            </n-flex>
           </n-flex>
-        </n-flex>
-      </template>
-    </n-card>
+        </template>
+      </n-card>
+    </n-flex>
     <n-flex v-if="isShowContent" vertical style="margin-top: 16px;">
       <n-flex v-if="hasGenerated" justify="end">
         <n-button quaternary @click="regenerate">
