@@ -80,16 +80,6 @@ onBeforeMount(async () => {
   loadingBar.finish()
 })
 
-const gptItems = [
-  {
-    key: 'derivative',
-    label: '派生词'
-  },
-  {
-    key: 'root',
-    label: '词根'
-  },
-]
 
 function backToHome(){
   router.push({
