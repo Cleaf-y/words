@@ -63,7 +63,17 @@ onBeforeMount(async () => {
   const info = data.data.pageProps.initialReduxState.word.wordInfo.baesInfo
   console.log(info)
   basicExplanation.value = info
-  collinsExplanation.value = data.data.pageProps.initialReduxState.word.wordInfo.collins
+  // 如果拿不到collins字段，说明走的是翻译api，没查到词
+  if (info.translate_result) {
+    pageData.finding = false
+    pageData.found = false
+    loadingBar.error()
+    return
+  }
+  if (data.data.pageProps.initialReduxState.word.wordInfo.collins) {
+    collinsExplanation.value = data.data.pageProps.initialReduxState.word.wordInfo.collins
+    pageData.collins = true
+  }
   pageData.finding = false
   pageData.found = true
   loadingBar.finish()
