@@ -26,6 +26,9 @@ importers:
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(vue@3.4.27)
+      tauri-plugin-sql-api:
+        specifier: github:tauri-apps/tauri-plugin-sql#v1
+        version: git+https://git@github.com:tauri-apps/tauri-plugin-sql.git#2538100478b8751a4d723f5fb2caef84f12692f8
       vue:
         specifier: ^3.3.4
         version: 3.4.27
@@ -826,6 +829,10 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  tauri-plugin-sql-api@git+https://git@github.com:tauri-apps/tauri-plugin-sql.git#2538100478b8751a4d723f5fb2caef84f12692f8:
+    resolution: {commit: 2538100478b8751a4d723f5fb2caef84f12692f8, repo: git@github.com:tauri-apps/tauri-plugin-sql.git, type: git}
+    version: 0.0.0
+
   to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
@@ -1592,6 +1599,10 @@ snapshots:
       acorn: 8.11.3
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  tauri-plugin-sql-api@git+https://git@github.com:tauri-apps/tauri-plugin-sql.git#2538100478b8751a4d723f5fb2caef84f12692f8:
+    dependencies:
+      '@tauri-apps/api': 1.5.6
 
   to-fast-properties@2.0.0: {}
 
