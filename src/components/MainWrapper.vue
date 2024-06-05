@@ -1,6 +1,6 @@
 <script setup>
 // handle theme switch
-import {DarkModeOutlined, LightModeOutlined, CloseOutlined, HomeFilled} from "@vicons/material";
+import {DarkModeOutlined, LightModeOutlined, CloseOutlined, HomeFilled, HistoryOutlined, ListAltOutlined, SettingsOutlined} from "@vicons/material";
 import { useConfigStore } from "../stores/config";
 const configStore = useConfigStore();
 
@@ -31,6 +31,10 @@ function handleToHome(){
   })
   reload()
 }
+function handleNavigateTo(name){
+  router.push({
+    name
+  })
 }
 
 import { inject, nextTick, provide } from "vue";
@@ -48,24 +52,65 @@ provide('reload', reload)
 <n-layout class="base">
     <n-space id="main-wrapper" vertical>
       <n-space data-tauri-drag-region id="header" justify="space-between">
-        <n-button id="btn-home" @click="handleToHome" text v-show="!isRouterHome">
-          <template #icon>
-            <n-icon><HomeFilled /></n-icon>
-          </template>
-        </n-button>
+        <n-space id="btn-grp-left">
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-button id="btn-home" @click="handleToHome" text v-show="!isRouterHome">
+                <template #icon>
+                  <n-icon><HomeFilled /></n-icon>
+                </template>
+              </n-button>
+            </template>
+            返回主页
+          </n-tooltip>
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-button text v-show="isRouterHome">
+                <n-icon :size="20"><HistoryOutlined /></n-icon>
+              </n-button>
+            </template>
+            历史记录
+          </n-tooltip>
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-button @click="handleNavigateTo('WordsBook')" text v-show="isRouterHome">
+                <n-icon :size="20"><ListAltOutlined /></n-icon>
+              </n-button>
+            </template>
+            单词本
+          </n-tooltip>
+        </n-space>
         <n-space id="btn-grp">
-          <n-button text @click="configStore.updateTheme">
-            <template v-if="!configStore.isDarkTheme" #icon>
-              <n-icon><DarkModeOutlined /></n-icon>
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-button text @click="configStore.updateTheme">
+                <template v-if="!configStore.isDarkTheme" #icon>
+                  <n-icon><DarkModeOutlined /></n-icon>
+                </template>
+                <template v-if="configStore.isDarkTheme" #icon>
+                  <n-icon><LightModeOutlined /></n-icon>
+                </template>
+              </n-button>
             </template>
-            <template v-if="configStore.isDarkTheme" #icon>
-              <n-icon><LightModeOutlined /></n-icon>
+            切换主题
+          </n-tooltip>
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-button @click="exitApp" text><template #icon><n-icon><CloseOutlined /></n-icon></template></n-button>
             </template>
-          </n-button>
-          <n-button @click="exitApp" text><template #icon><n-icon><CloseOutlined /></n-icon></template></n-button>
+            退出
+          </n-tooltip>
         </n-space>
       </n-space>
       <router-view v-if="isRouterAlive" :key="router.currentRoute.value.fullPath"/>
+      <n-space v-if="isRouterHome" id="footer" justify="start">
+        <n-tooltip trigger="hover">
+          <template #trigger>
+            <n-button text @click="handleNavigateTo('Settings')"><n-icon :size="18"><SettingsOutlined /></n-icon></n-button>
+          </template>
+          设置
+        </n-tooltip>
+      </n-space>
     </n-space>
 </n-layout>
 </template>
@@ -86,5 +131,11 @@ provide('reload', reload)
 }
 #btn-home {
   margin-left: 12px;
+}
+#footer {
+  position: absolute;
+  bottom: 24px;
+  margin-left: 32px;
+  margin-top: 16px;
 }
 </style>
