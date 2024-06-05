@@ -30,7 +30,6 @@ const promptMap = {
     'scene': scenePrompt
 }
 
-function getQuery(){
 
 function getGPTExplanation(word, promptType){
     // get config from loacl storage
@@ -61,33 +60,6 @@ function getGPTExplanation(word, promptType){
 }
 
 
-async function getExplanation(word){
-    const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-    const client = axios.create({adapter: axiosTauriApiAdapter});
-    try {
-        const response_data = await client.get(url)
-        if (response_data.status !== 200) {
-            return {
-                found: false
-            }
-        } else {
-            let data = response_data.data[0]
-            console.log(data)
-            return {
-                found: true,
-                data
-            }
-        }
-    } catch (e) {
-        console.warn(e)
-        return {
-            found: false,
-            err: e
-        }
-    }
-}
-
-
 function getSuggestion(word){
     return httpRequest({
         url: 'https://dict.youdao.com/suggest',
@@ -111,4 +83,4 @@ function getCibaExplanation(word){
     })
 }
 
-export {getQuery, getExplanation, getSuggestion, getCibaExplanation}
+export { getSuggestion, getCibaExplanation, getSingleBrief, getGPTExplanation }
