@@ -1,0 +1,195 @@
+<template>
+  <n-space vertical justify="center">
+    <div class="input-box">
+        <n-auto-complete ref="wordInputRef"
+                         v-model:value="queryWord"
+                         :options="wordOptions"
+                         :render-label="renderEntryList"
+                         size="large"
+                         clearable
+                         placeholder=" Input your word..."
+                         @update:value="onEntry"
+                         @select="onSelected"
+                         @keydown.esc="onEsc"
+                         @keydown.enter="onEnter"
+        >
+          <template #prefix>
+            <n-icon><SearchOutlined /></n-icon>
+          </template>
+        </n-auto-complete>
+    </div>
+    <n-divider />
+    <div class="qoute-box">
+      <n-space vertical>
+        <n-space justify="space-between">
+          <n-text type="success">每日一句</n-text>
+          <n-text :depth="3">{{todayStr}}</n-text>
+        </n-space>
+        <n-space justify="center">
+          <n-h3 >{{dailyQuote.note}}</n-h3>
+        </n-space>
+        <n-space justify="center">
+          <n-h2>{{dailyQuote.content}}</n-h2>
+        </n-space>
+      </n-space>
+    </div>
+    <div class="stat-box">
+      <n-space justify="center">
+        <n-card>
+          <n-statistic label="共学习单词">
+            645
+          </n-statistic>
+        </n-card>
+        <n-card>
+          <n-statistic label="今日单词">
+            0
+          </n-statistic>
+        </n-card>
+        <n-card>
+          <n-statistic label="待复习单词">
+            5
+          </n-statistic>
+        </n-card>
+      </n-space>
+    </div>
+  </n-space>
+</template>
+
+<script setup>
+import {ref, onMounted, h, onBeforeUnmount} from "vue";
+import {getDailyQuote} from "@/api/qoute.js";
+import dayjs from "dayjs";
+import {SearchOutlined} from "@vicons/antd";
+
+const wordInputRef = ref(null)
+const queryWord = ref("");
+
+const dailyQuote = reactive({
+  content: "An hour in the morning is worth two in the evening",
+  note: "一日之计在于晨"
+})
+const todayStr = dayjs().format('YYYY-MM-DD')
+
+import {useDialog} from "naive-ui";
+const dialog = useDialog()
+
+onMounted(async ()=>{
+  const dq = await getDailyQuote()
+  dailyQuote.content = dq.content
+  dailyQuote.note = dq.note
+
+  wordInputRef.value.focus()
+
+  // check config in localStorage
+  if (!localStorage.getItem('config')) {
+    dialog.warning({
+      title: '需要设置',
+      content: '未找到配置信息，请设置OpenAI相关信息',
+      positiveText: '设置',
+      negativeText: '暂不设置',
+      onPositiveClick: ()=>{
+        appRouter.push({
+          name: 'Settings'
+        })
+      }
+    })
+  }
+})
+
+
+import {useRouter} from "vue-router";
+const appRouter = useRouter()
+function onEnter(){
+  if(queryWord.value==='') return
+
+  appRouter.push({
+    name: 'Query',
+    query: {
+      word: queryWord.value
+    }
+  })
+}
+
+
+import {getSuggestion} from "@/api/query.js";
+const entriesList = ref([])
+const wordOptions = computed(()=>{
+  if (entriesList.value && entriesList.value.length===0) {
+    return []
+  }
+  return entriesList.value.map(((item, index)=>{
+    // return `${item.entry} ${item.explain}`
+    return {
+      label: item.entry,
+      value: item.entry,
+      ex: item.explain
+    }
+  }))
+})
+
+function onEntry(currentEntry) {
+  if(currentEntry==='') {
+    return
+  }
+  getSuggestion(currentEntry).then(res=>{
+    if (res.data.result.code === 404) {
+      entriesList.value = []
+    } else {
+      entriesList.value = res.data.data.entries
+    }
+  })
+}
+function onEsc(){
+  queryWord.value = ''
+  wordInputRef.value.focus()
+}
+function onSelected(val) {
+  //let queryWord = val.split(' ')[0]
+  appRouter.push({
+    name: 'Query',
+    query: {
+      word: val
+    }
+  })
+}
+
+const showDropdown = ref(false)
+function setDropDownVis(val){
+  showDropdown.value = val
+}
+
+
+import {NText} from "naive-ui";
+function renderEntryList(opt) {
+  return h('a', {}, [
+      h(NText, {
+        type: 'primary',
+        strong: true
+      }, opt.label + ' '),
+  h(NText, {depth: '3'}, opt.ex)])
+}
+</script>
+
+<style lang="scss" scoped>
+.input-box {
+  margin-top: 64px;
+  padding: 0 36px 0 36px;
+  .input-item {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+.stat-box {
+  margin-top: 16px;
+}
+
+.qoute-box {
+  margin-top: 16px;
+  padding: 0 36px 0 36px;
+}
+
+.dropdown {
+  width: 400px;
+}
+</style>
