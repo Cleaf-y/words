@@ -127,9 +127,3 @@ defineExpose({
   </n-scrollbar>
 
 </template>
-
-<style scoped lang="scss">
-#word-root {
-  margin-top: 16px;
-}
-</style>
