@@ -5,6 +5,9 @@ import {useLoadingBar} from "naive-ui";
 import {AccessTimeOutlined} from "@vicons/material";
 import {Speaker120Regular} from "@vicons/fluent";
 import {getExplanation, getCibaExplanation} from "@/api/query.js";
+import WordRoot from "@/components/WordRoot.vue";
+import Derives from "@/components/Derives.vue";
+import Scenes from "@/components/Scenes.vue";
 
 
 const wordType = {
@@ -46,9 +49,8 @@ const collinsExplanation = ref(null)
 const phoneticPlayerRef = ref(null)
 const loadingBar = useLoadingBar()
 
-function getWordQuery(word) {
-  return ''
-}
+const tabWordRootRef = ref(null)
+
 
 onBeforeMount(async () => {
   loadingBar.start()
@@ -145,11 +147,14 @@ function playPhonetic(isBrE){
               </n-scrollbar>
             </n-space>
           </n-tab-pane>
-          <n-tab-pane v-for="item in gptItems" :name="item.label">
-            some content
+          <n-tab-pane display-directive="show" name="词根" :key="1">
+            <WordRoot ref="tabWordRootRef" :current-word="queryInfo.word"/>
           </n-tab-pane>
-          <n-tab-pane name="情景例句">
-
+          <n-tab-pane display-directive="show" name="串记" :key="2">
+            <Derives :word="queryInfo.word"/>
+          </n-tab-pane>
+          <n-tab-pane display-directive="show" name="情景" :key="3">
+            <Scenes :word="queryInfo.word"/>
           </n-tab-pane>
         </n-tabs>
       </n-flex>
