@@ -80,6 +80,11 @@ onBeforeMount(async () => {
   loadingBar.finish()
 })
 
+onBeforeUnmount(()=>{
+  if(pageData.finding){
+    loadingBar.finish()
+  }
+})
 
 function backToHome(){
   router.push({
