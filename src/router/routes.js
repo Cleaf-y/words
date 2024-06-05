@@ -19,5 +19,4 @@ export const routes = [
     name: 'Settings',
     component: () => import('@/pages/Settings.vue')
   },
-  }
 ];
