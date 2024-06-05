@@ -74,6 +74,20 @@ function getSuggestion(word){
     })
 }
 
+function getSingleBrief(word){
+    return httpRequest({
+        url: 'https://dict.youdao.com/suggest',
+        query: {
+            num: '1',
+            ver: '3.0',
+            doctype: 'json',
+            cache: 'false',
+            le: 'en',
+            q: word
+        }
+    })
+}
+
 function getCibaExplanation(word){
     return httpRequest({
         url: 'https://www.iciba.com/_next/data/uGKktS1eP3HVzdLazkkJY/word.json',
