@@ -23,6 +23,9 @@
       },
       "window": {
         "all": true
+      },
+      "path": {
+        "all": true
       }
     },
     "windows": [
