@@ -91,7 +91,7 @@ defineExpose({
 </script>
 
 <template>
-  <n-card v-if="pageStatus.finding">
+  <n-card size="small" v-if="pageStatus.finding">
     <template #header>
       <n-skeleton text height="32px" width="20%"/>
       <br />
