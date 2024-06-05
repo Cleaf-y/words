@@ -116,7 +116,7 @@ function onChangeTab(newTabName) {
   <audio ref="phoneticPlayerRef"/>
   <n-empty class="tips" v-if="!pageData.finding && !pageData.found" size="huge" description="未找到单词">
     <template #extra>
-      <n-button @click="backToHome">返回</n-button>
+      <n-button secondary type="primary" size="large" @click="backToHome">返回</n-button>
     </template>
   </n-empty>
   <n-space v-if="!pageData.finding">
