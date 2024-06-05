@@ -65,7 +65,6 @@ provide('reload', reload)
           <n-button @click="exitApp" text><template #icon><n-icon><CloseOutlined /></n-icon></template></n-button>
         </n-space>
       </n-space>
-      <router-view />
       <router-view v-if="isRouterAlive" :key="router.currentRoute.value.fullPath"/>
     </n-space>
 </n-layout>
