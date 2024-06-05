@@ -121,19 +121,26 @@ function onChangeTab(newTabName) {
   </n-empty>
   <n-space v-if="!pageData.finding">
     <n-space v-if="pageData.found">
-      <n-flex vertical id="brief">
-        <n-h1>{{queryInfo.word}}</n-h1>
-        <div>
-          <strong>BrE</strong> &nbsp; /{{basicExplanation.symbols[0].ph_en}}/ &nbsp;
-          <n-a @click="playPhonetic(true)"><n-icon size="16"><Speaker120Regular /></n-icon></n-a>
-          <br/>
-          <strong>AmE</strong> &nbsp; /{{basicExplanation.symbols[0].ph_am}}/ &nbsp;
-          <n-a @click="playPhonetic(false)"><n-icon size="16"><Speaker120Regular /></n-icon></n-a>
-        </div>
-        <n-space v-for="item in basicExplanation.symbols[0].parts">
-          <n-text type="success" strong :depth="3">{{item.part}}</n-text>
-          <span v-for="meaning in item.means">{{meaning}};</span>
-        </n-space>
+      <n-flex vertical>
+        <n-flex id="brief" vertical>
+          <n-h1>{{queryInfo.word}}</n-h1>
+          <n-rate id="collect" size="small"></n-rate>
+        </n-flex>
+        <n-scrollbar style="max-height: 350px;">
+          <n-flex vertical v-for="symbol in basicExplanation.symbols" id="brief">
+            <div id="phonetics">
+              <strong>BrE</strong> &nbsp;&nbsp;&nbsp; /{{symbol.ph_en}}/ &nbsp;
+              <n-a @click="playPhonetic(true)"><n-icon size="16"><Speaker120Regular /></n-icon></n-a>
+              <br/>
+              <strong>AmE</strong> &nbsp; /{{symbol.ph_am}}/ &nbsp;
+              <n-a @click="playPhonetic(false)"><n-icon size="16"><Speaker120Regular /></n-icon></n-a>
+            </div>
+            <n-space id="brief-info" v-for="item in symbol.parts">
+              <n-text type="success" strong :depth="3">{{item.part}}</n-text>
+              <span v-for="meaning in item.means">{{meaning}};</span>
+            </n-space>
+          </n-flex>
+        </n-scrollbar>
       </n-flex>
       <n-flex vertical id="gpt">
         <n-tabs type="line" animated>
