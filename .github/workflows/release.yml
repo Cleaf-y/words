@@ -35,11 +35,12 @@ jobs:
           # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      - name: setup pnpm
-        run: npm install -g pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8
 
       - name: install frontend dependencies
-        run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
+        run: pnpm install
 
       - uses: tauri-apps/tauri-action@v0
         env:
