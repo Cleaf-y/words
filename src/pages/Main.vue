@@ -1,22 +1,15 @@
 <template>
   <n-space vertical justify="center">
     <div class="input-box">
-        <n-auto-complete ref="wordInputRef"
-                         v-model:value="queryWord"
-                         :options="wordOptions"
-                         :render-label="renderEntryList"
-                         size="large"
-                         clearable
-                         placeholder=" Input your word..."
-                         @update:value="onEntry"
-                         @select="onSelected"
-                         @keydown.esc="onEsc"
-                         @keydown.enter="onEnter"
-        >
-          <template #prefix>
-            <n-icon><SearchOutlined /></n-icon>
-          </template>
-        </n-auto-complete>
+      <n-auto-complete ref="wordInputRef" v-model:value="queryWord" :options="wordOptions"
+        :render-label="renderEntryList" size="large" clearable placeholder=" Input your word..." @update:value="onEntry"
+        @select="onSelected" @keydown.esc="onEsc" @keydown.enter="onEnter">
+        <template #prefix>
+          <n-icon>
+            <SearchOutlined />
+          </n-icon>
+        </template>
+      </n-auto-complete>
     </div>
     <n-divider />
     <div class="quote-box">
