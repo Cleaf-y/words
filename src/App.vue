@@ -14,6 +14,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
+  <n-spin v-if="!isReady" id="loading" size="large" />
   <n-config-provider :theme="configStore.currentTheme" v-if="isReady">
     <n-message-provider>
       <n-dialog-provider>
@@ -29,6 +30,10 @@ onBeforeMount(async () => {
   </n-config-provider>
 </template>
 
-<style>
+<style lang="scss">
+#loading {
+  margin-top: 45vh;
+  margin-left: 48vw;
+}
 
 </style>
