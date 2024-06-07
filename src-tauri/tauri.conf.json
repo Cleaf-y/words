@@ -59,7 +59,7 @@
       "endpoints": [
         "https://gist.githubusercontent.com/Cleaf-y/4a133fab8b658ff842f04300d4a5474d/raw/10ac4caf3f6287e6ed3478131c3d6965dbb3865b/words.json"
       ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk5OERBNDM4MzM1NjVERjUKUldUMVhWWXpPS1NObVp4aVRwZDc5VnQ4QS96VEdLSVI4ZSt6Z0lISnhYSjZ3TkZtdWhTamIyWHkK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDY2Mzg4Mzg1NDRBNTFFMkMKUldRc0hxVkVoWU00Wmw2ckkwREk0cCtWYU5hQjhUbzdiSG1tM3RMZzVZVUZHdEk5bFBRcU54TEMK",
       "windows": {
         "installMode": "passive",
         "installerArgs": []
