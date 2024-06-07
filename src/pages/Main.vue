@@ -26,7 +26,7 @@
         </n-space>
       </n-space>
     </div>
-    <div class="stat-box">
+    <div class="stat-box no-select">
       <n-space justify="center">
         <n-card>
           <n-statistic label="共学习单词">

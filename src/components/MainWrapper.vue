@@ -50,6 +50,7 @@ provide('reload', reload)
 
 <template>
 <n-layout class="base">
+  <n-layout class="base no-select">
     <n-space id="main-wrapper" vertical>
       <n-space data-tauri-drag-region id="header" justify="space-between">
         <n-space id="btn-grp-left">
@@ -84,7 +85,7 @@ provide('reload', reload)
             单词本
           </n-tooltip>
         </n-space>
-        <n-space id="btn-grp">
+        <n-space id="btn-grp" class="no-select">
           <n-tooltip trigger="hover">
             <template #trigger>
               <n-button text @click="configStore.updateTheme">

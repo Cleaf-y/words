@@ -21,7 +21,7 @@ onBeforeMount(async () => {
         <n-notification-provider>
           <n-modal-provider>
             <n-loading-bar-provider>
-              <MainWrapper />
+              <MainWrapper class="no-select" />
             </n-loading-bar-provider>
           </n-modal-provider>
         </n-notification-provider>
