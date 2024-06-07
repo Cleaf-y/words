@@ -3,15 +3,14 @@ import { useConfigStore } from "./stores/config";
 import MainWrapper from "@/components/MainWrapper.vue";
 const configStore = useConfigStore();
 
+import { ref, onBeforeMount } from "vue";
+import { initDatabase } from "@/database/init.js";
 
-import {ref, onBeforeMount} from 'vue'
-import {initDatabase} from "@/database/init.js";
-
-const isReady = ref(false)
-onBeforeMount(async ()=>{
-  await initDatabase()
-  isReady.value = true
-})
+const isReady = ref(false);
+onBeforeMount(async () => {
+  await initDatabase();
+  isReady.value = true;
+});
 </script>
 
 <template>

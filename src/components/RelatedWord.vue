@@ -1,17 +1,18 @@
 <script setup>
-import {ref} from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   word: String
 })
+
 const found = ref(false)
 const explanation = ref(null)
 
-import {getSingleBrief} from "@/api/query.js";
+import { getSingleBrief } from "@/api/query.js";
 
 const isShowTips = ref(false)
-async function onMouseOver(){
-  if(!found.value){
+async function onMouseOver() {
+  if (!found.value) {
     try {
       let result = await getSingleBrief(props.word)
       explanation.value = result.data.data.entries[0]
@@ -22,14 +23,14 @@ async function onMouseOver(){
   }
   isShowTips.value = true
 }
-function onMouseLeave(){
+function onMouseLeave() {
   isShowTips.value = false
 }
 
 
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 const router = useRouter()
-function navigateToWord(){
+function navigateToWord() {
   router.push({
     name: 'Query',
     query: {

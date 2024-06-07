@@ -1,37 +1,37 @@
 <script setup>
 // handle theme switch
-import {DarkModeOutlined, LightModeOutlined, CloseOutlined, HomeFilled, HistoryOutlined, ListAltOutlined, SettingsOutlined} from "@vicons/material";
+import { DarkModeOutlined, LightModeOutlined, CloseOutlined, HomeFilled, HistoryOutlined, ListAltOutlined, SettingsOutlined, ArrowBackOutlined } from "@vicons/material";
 import { useConfigStore } from "../stores/config";
 const configStore = useConfigStore();
 
 // handle Exit button click
-import {useDialog} from "naive-ui";
-import {appWindow} from "@tauri-apps/api/window"
+import { useDialog } from "naive-ui";
+import { appWindow } from "@tauri-apps/api/window"
 const dialog = useDialog();
-function exitApp(){
+function exitApp() {
   dialog.info({
     title: '退出',
     content: '确定要退出吗？',
     positiveText: '确定',
     negativeText: '取消',
-    onPositiveClick: ()=>{
+    onPositiveClick: () => {
       appWindow.close()
     }
   })
 }
 
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 const router = useRouter()
-const isRouterHome = computed(()=>{
+const isRouterHome = computed(() => {
   return router.currentRoute.value.name === 'Home'
 })
-function handleToHome(){
+function handleToHome() {
   router.replace({
     name: 'Home'
   })
   reload()
 }
-function handleNavigateTo(name){
+function handleNavigateTo(name) {
   router.push({
     name
   })
@@ -41,7 +41,7 @@ import { inject, nextTick, provide } from "vue";
 const isRouterAlive = ref(true)
 const reload = () => {
   isRouterAlive.value = false
-  nextTick(()=> {
+  nextTick(() => {
     isRouterAlive.value = true
   })
 }
@@ -57,7 +57,9 @@ provide('reload', reload)
             <template #trigger>
               <n-button id="btn-home" @click="handleToHome" text v-show="!isRouterHome">
                 <template #icon>
-                  <n-icon><HomeFilled /></n-icon>
+                  <n-icon>
+                    <HomeFilled />
+                  </n-icon>
                 </template>
               </n-button>
             </template>
@@ -74,7 +76,9 @@ provide('reload', reload)
           <n-tooltip trigger="hover">
             <template #trigger>
               <n-button @click="handleNavigateTo('WordsBook')" text v-show="isRouterHome">
-                <n-icon :size="20"><ListAltOutlined /></n-icon>
+                <n-icon :size="20">
+                  <ListAltOutlined />
+                </n-icon>
               </n-button>
             </template>
             单词本
@@ -85,10 +89,14 @@ provide('reload', reload)
             <template #trigger>
               <n-button text @click="configStore.updateTheme">
                 <template v-if="!configStore.isDarkTheme" #icon>
-                  <n-icon><DarkModeOutlined /></n-icon>
+                  <n-icon>
+                    <DarkModeOutlined />
+                  </n-icon>
                 </template>
                 <template v-if="configStore.isDarkTheme" #icon>
-                  <n-icon><LightModeOutlined /></n-icon>
+                  <n-icon>
+                    <LightModeOutlined />
+                  </n-icon>
                 </template>
               </n-button>
             </template>
@@ -96,23 +104,27 @@ provide('reload', reload)
           </n-tooltip>
           <n-tooltip trigger="hover">
             <template #trigger>
-              <n-button @click="exitApp" text><template #icon><n-icon><CloseOutlined /></n-icon></template></n-button>
+              <n-button @click="exitApp" text><template #icon><n-icon>
+                    <CloseOutlined />
+                  </n-icon></template></n-button>
             </template>
             退出
           </n-tooltip>
         </n-space>
       </n-space>
-      <router-view v-if="isRouterAlive" :key="router.currentRoute.value.fullPath"/>
+      <router-view v-if="isRouterAlive" :key="router.currentRoute.value.fullPath" />
       <n-space v-if="isRouterHome" id="footer" justify="start">
         <n-tooltip trigger="hover">
           <template #trigger>
-            <n-button text @click="handleNavigateTo('Settings')"><n-icon :size="18"><SettingsOutlined /></n-icon></n-button>
+            <n-button text @click="handleNavigateTo('Settings')"><n-icon :size="18">
+                <SettingsOutlined />
+              </n-icon></n-button>
           </template>
           设置
         </n-tooltip>
       </n-space>
     </n-space>
-</n-layout>
+  </n-layout>
 </template>
 
 <style lang="scss" scoped>
@@ -129,9 +141,11 @@ provide('reload', reload)
 #btn-grp {
   margin-right: 16px;
 }
+
 #btn-home {
   margin-left: 12px;
 }
+
 #footer {
   position: absolute;
   bottom: 24px;
