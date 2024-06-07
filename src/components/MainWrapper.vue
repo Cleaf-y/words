@@ -49,10 +49,24 @@ const reload = () => {
   })
 }
 provide('reload', reload)
+
+import History from '@/components/History.vue'
+const isShowHistoryModal = ref(false)
+function showHistoryModal() {
+  isShowHistoryModal.value = true
+}
+
+function onRedirected() {
+  isShowHistoryModal.value = false
+}
+
 </script>
 
 <template>
 <n-layout class="base">
+  <n-modal v-model:show="isShowHistoryModal" preset="card" style="width: 80vw;" size="small">
+    <History @closeModal="onRedirected" />
+  </n-modal>
   <n-layout class="base no-select">
     <n-space id="main-wrapper" vertical>
       <n-space data-tauri-drag-region id="header" justify="space-between">
