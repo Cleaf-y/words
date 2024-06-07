@@ -55,12 +55,16 @@ const loadingBar = useLoadingBar();
 
 const tabWordRootRef = ref(null);
 
-
+import { getQueriedTimes, addQueryHistory } from "../database/queryHistory";
+import { getWord } from "../database/wordNote";
 onBeforeMount(async () => {
-  loadingBar.start()
+  loadingBar.start();
+  let { word } = route.query;
 
-  let {word} = route.query
-  queryInfo.word = word
+  await addQueryHistory(word);
+
+  queryInfo.queriedTimes = parseInt(await getQueriedTimes(word));
+  queryInfo.word = word;
   //const data = await getExplanation(word)
   const data = await getCibaExplanation(word);
 
@@ -78,10 +82,15 @@ onBeforeMount(async () => {
       data.data.pageProps.initialReduxState.word.wordInfo.collins;
     pageData.collins = true;
   }
-  pageData.finding = false
-  pageData.found = true
-  loadingBar.finish()
-})
+  pageData.finding = false;
+  pageData.found = true;
+
+  let importance = await getWord(word);
+  queryInfo.importance = importance;
+  console.log('@', importance)
+
+  loadingBar.finish();
+});
 
 onBeforeUnmount(() => {
   if (pageData.finding) {
