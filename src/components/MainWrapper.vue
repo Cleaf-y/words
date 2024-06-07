@@ -63,7 +63,9 @@ function onRedirected() {
 </script>
 
 <template>
-<n-layout class="base">
+  <div class="light" v-if="configStore.isDarkTheme">·</div>
+  <img class="logo" v-if="isRouterHome & !configStore.isDarkTheme" src="@/assets/logo-light.png" />
+  <img class="logo" v-if="isRouterHome & configStore.isDarkTheme" src="@/assets/logo-night.png" />
   <n-space v-if="isRouterHome" class="title no-select">
     <div class="title-wrapper" data-tauri-drag-region>
       <n-text class="title">Words</n-text>
@@ -171,6 +173,16 @@ function onRedirected() {
   height: 100vh;
 }
 
+.logo {
+  position: absolute;
+  z-index: 19;
+  bottom: 12px;
+  right: 16px;
+  width: 144px;
+  height: 144px;
+  filter: drop-shadow(2px 3px 3px rgba(1, 42, 22, 0.5));
+}
+
 .title {
   position: absolute;
   z-index: 9;
@@ -205,6 +217,16 @@ function onRedirected() {
   .description {
     font-size: 16px;
   }
+}
+
+.light {
+  font-size: 64px;
+  position: absolute;
+  z-index: 99;
+  bottom: 74px;
+  right: 80px;
+  color: #ffff66;
+  text-shadow: 0 0 10px #ffff66, 0 0 20px #ffff66, 0 0 30px #ffff66, 0 0 40px #ffff66, 0 0 50px #ffff66, 0 0 60px #ffff66, 0 0 70px #ffff66;
 }
 
 #header {
