@@ -29,7 +29,10 @@ function handleToHome() {
   router.replace({
     name: 'Home'
   })
-  reload()
+  // reload()
+}
+function handleToBack() {
+  router.back()
 }
 function handleNavigateTo(name) {
   router.push({
@@ -68,8 +71,22 @@ provide('reload', reload)
           </n-tooltip>
           <n-tooltip trigger="hover">
             <template #trigger>
-              <n-button text v-show="isRouterHome">
-                <n-icon :size="20"><HistoryOutlined /></n-icon>
+              <n-button @click="handleToBack" text v-show="!isRouterHome">
+                <template #icon>
+                  <n-icon>
+                    <ArrowBackOutlined />
+                  </n-icon>
+                </template>
+              </n-button>
+            </template>
+            返回上一页
+          </n-tooltip>
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-button text v-show="isRouterHome" @click="showHistoryModal">
+                <n-icon :size="20">
+                  <HistoryOutlined />
+                </n-icon>
               </n-button>
             </template>
             历史记录
