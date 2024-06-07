@@ -64,6 +64,12 @@ function onRedirected() {
 
 <template>
 <n-layout class="base">
+  <n-space v-if="isRouterHome" class="title no-select">
+    <div class="title-wrapper" data-tauri-drag-region>
+      <n-text class="title">Words</n-text>
+      <n-text class="desc" :depth="3">From one word to build vocabulary</n-text>
+    </div>
+  </n-space>
   <n-modal v-model:show="isShowHistoryModal" preset="card" style="width: 80vw;" size="small">
     <History @closeModal="onRedirected" />
   </n-modal>
@@ -163,6 +169,42 @@ function onRedirected() {
 .base {
   width: 100vw;
   height: 100vh;
+}
+
+.title {
+  position: absolute;
+  z-index: 9;
+  left: 27vw;
+  top: 42px;
+
+  .title-wrapper {
+    position: flex;
+    flex-direction: column;
+    justify-content: left;
+
+
+    .title {
+      position: relative;
+      font-size: 48px;
+      top: -24px;
+      left: 112px;
+      font-family: 'monoMMM_5', sans-serif;
+
+    }
+
+    .desc {
+      position: relative;
+      font-size: 16px;
+      left: -152px;
+      top: 8px;
+      font-family: 'monoMMM_5', sans-serif;
+    }
+
+  }
+
+  .description {
+    font-size: 16px;
+  }
 }
 
 #header {
