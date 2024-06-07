@@ -49,15 +49,13 @@ function navigateToWord() {
 </script>
 
 <template>
-<n-popover trigger="manual" :show="isShowTips" placement="bottom">
-  <template #trigger>
-    <n-button
-        text
-        @click="navigateToWord"
-        @mouseover="onMouseOver"
-        @mouseleave="onMouseLeave">{{props.word}}</n-button>
-  </template>
-  <template #header><n-text type="success" strong>{{explanation.entry}}</n-text></template>
-  <template #default><n-flex style="width: 280px;"><n-text>{{explanation.explain}}</n-text></n-flex></template>
-</n-popover>
+  <n-popover v-if="props.showPop" trigger="manual" :show="isShowTips" placement="bottom">
+    <template #trigger>
+      <n-button text @click="navigateToWord" @mouseover="onMouseOver"
+        @mouseleave="onMouseLeave">{{ props.word }}</n-button>
+    </template>
+    <template #header><n-text type="success" strong>{{ explanation.entry }}</n-text></template>
+    <template #default><n-flex style="width: 280px;"><n-text>{{ explanation.explain }}</n-text></n-flex></template>
+  </n-popover>
+  <n-button text @click="navigateToWord" v-if="!props.showPop">{{ props.word }}</n-button>
 </template>
