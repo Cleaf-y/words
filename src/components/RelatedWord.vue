@@ -2,7 +2,15 @@
 import { ref } from 'vue'
 
 const props = defineProps({
-  word: String
+  word: {
+    type: String,
+    required: true
+  },
+  showPop: {
+    type: Boolean,
+    default: true,
+    required: false
+  }
 })
 
 const found = ref(false)
