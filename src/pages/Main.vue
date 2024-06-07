@@ -28,20 +28,18 @@
     </div>
     <div class="stat-box no-select">
       <n-space justify="center">
-        <n-card>
-          <n-statistic label="共学习单词">
-            645
+        <n-card size="small">
+          <n-statistic label="共学习了">
+            <n-number-animation :from="0" :to="statisticsInfo.total" />
           </n-statistic>
         </n-card>
-        <n-card>
-          <n-statistic label="今日单词">
-            0
+        <n-card size="small">
+          <n-statistic label="今日已学">
+            <n-number-animation :from="0" :to="statisticsInfo.today" />
           </n-statistic>
         </n-card>
-        <n-card>
-          <n-statistic label="待复习单词">
-            5
-          </n-statistic>
+        <n-card v-if="false">
+          <n-statistic label="待复习单词"> 5 </n-statistic>
         </n-card>
       </n-space>
     </div>
@@ -66,12 +64,22 @@ const todayStr = dayjs().format("YYYY-MM-DD");
 import { useDialog } from "naive-ui";
 const dialog = useDialog();
 
-onMounted(async ()=>{
-  const dq = await getDailyQuote()
-  dailyQuote.content = dq.content
-  dailyQuote.note = dq.note
+import { getStatistics } from "../database/statistics";
+const statisticsInfo = ref({
+  total: 0,
+  today: 0
+})
+onMounted(async () => {
+  const dq = await getDailyQuote();
+  dailyQuote.content = dq.content;
+  dailyQuote.note = dq.note;
 
-  wordInputRef.value.focus()
+  let stats = await getStatistics();
+  console.log(stats);
+  statisticsInfo.value.total = stats.totalNotes;
+  statisticsInfo.value.today = stats.todayCounts;
+
+  wordInputRef.value.focus();
 
   // check config in localStorage
   if (!localStorage.getItem("config")) {
