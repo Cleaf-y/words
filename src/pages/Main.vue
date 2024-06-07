@@ -183,4 +183,14 @@ function renderEntryList(opt) {
 .dropdown {
   width: 400px;
 }
+
+.trans {
+  font-size: 20px;
+  font-family: 'KingHwa_OldSong';
+}
+
+.quote {
+  font-size: 22px;
+  font-family: 'Gloock', sans-serif;
+}
 </style>
