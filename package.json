@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "tauri:dev": "tauri dev"
+    "tauri:dev": "tauri dev",
+    "updater":"node updater.mjs"
   },
   "dependencies": {
     "@tauri-apps/api": "^1",
@@ -22,6 +23,7 @@
     "vue-router": "4"
   },
   "devDependencies": {
+    "@actions/github": "^6.0.0",
     "@tauri-apps/cli": "^1",
     "@vicons/antd": "^0.12.0",
     "@vicons/carbon": "^0.12.0",
