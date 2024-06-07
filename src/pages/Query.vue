@@ -174,12 +174,14 @@ async function handleWordNote(newImportance){
         <n-tabs v-if="pageData.collins" type="line" animated @update:value="onChangeTab">
           <n-tab-pane name="详解" :key="0">
             <n-space size="small">
-              <n-scrollbar style="max-height: 400px;width: 500px;">
-                <n-text>共有 <n-text strong type="success">{{collinsExplanation[0].entry.length}}</n-text> 个义项</n-text>
-                <n-card class="cards-wrapper"
-                        size="small"
-                        v-for="(item, index) in collinsExplanation[0].entry"
-                        :title="`${index+1}.${item.tran}`">
+              <n-scrollbar style="max-height: 400px; width: 500px">
+                <n-text>共有
+                  <n-text strong type="success">{{
+                    collinsExplanation[0].entry.length
+                  }}</n-text>
+                  个义项</n-text>
+                <n-card class="cards-wrapper" size="small" v-for="(item, index) in collinsExplanation[0].entry"
+                  :title="`${index + 1}.${item.tran}`">
                   <span v-html="item.def"></span>
                   <template #header-extra>
                     <n-tag size="small" v-if="item.posp" type="success">{{
