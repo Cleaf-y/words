@@ -121,6 +121,15 @@ function onChangeTab(newTabName) {
     tabDict[newTabName].value.generateWordRootExplanation();
   }
 }
+
+
+import { wordNote } from '@/database/wordNote.js'
+async function handleWordNote(newImportance){
+  let changed = await wordNote(queryInfo.word, {
+    importance: newImportance
+  })
+  queryInfo.importance = changed
+}
 </script>
 
 <template>
@@ -134,10 +143,13 @@ function onChangeTab(newTabName) {
     <n-space v-if="pageData.found">
       <n-flex vertical>
         <n-flex id="brief" vertical>
-          <n-h1>{{queryInfo.word}}</n-h1>
-          <n-rate id="collect" size="small"></n-rate>
+          <n-h1>{{ queryInfo.word }}</n-h1>
+          <n-rate id="collect" size="small" :default-value="0" v-model:value="queryInfo.importance" @update:value="handleWordNote"></n-rate>
+          <n-flex justify="start">
+            <n-tag v-if="queryInfo.queriedTimes > 1" size="small">已查{{ queryInfo.queriedTimes }}次</n-tag>
+          </n-flex>
         </n-flex>
-        <n-scrollbar style="max-height: 350px;">
+        <n-scrollbar style="max-height: 350px">
           <n-flex vertical v-for="symbol in basicExplanation.symbols" id="brief">
             <div id="phonetics">
               <strong>BrE</strong> &nbsp;&nbsp;&nbsp; /{{ symbol.ph_en }}/ &nbsp;
