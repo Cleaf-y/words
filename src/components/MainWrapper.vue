@@ -63,7 +63,7 @@ function onRedirected() {
 </script>
 
 <template>
-  <div class="light" v-if="configStore.isDarkTheme">·</div>
+  <div class="light" v-if="isRouterHome & configStore.isDarkTheme">·</div>
   <img class="logo" v-if="isRouterHome & !configStore.isDarkTheme" src="@/assets/logo-light.png" />
   <img class="logo" v-if="isRouterHome & configStore.isDarkTheme" src="@/assets/logo-night.png" />
   <n-space v-if="isRouterHome" class="title no-select">
