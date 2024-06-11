@@ -76,7 +76,7 @@ function getGPTExplanation(word, promptType){
                 },
                 {
                     'role': 'user',
-                    'content': word
+                    'content': `generate content for ${word}`
                 }
             ],
             stream: false
