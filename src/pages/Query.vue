@@ -213,6 +213,9 @@ async function handleWordNote(newImportance){
           <n-tab-pane display-directive="show" name="情景" :key="3">
             <Scenes :word="queryInfo.word" />
           </n-tab-pane>
+          <n-tab-pane display-directive="show" name="关系树" :key="4">
+            <Tree :word="queryInfo.word"/>
+          </n-tab-pane>
         </n-tabs>
       </n-flex>
     </n-space>
