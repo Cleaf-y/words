@@ -17,7 +17,6 @@ async function generateSceneExamples(scene){
   isGenerating.value = true
   try {
     let result = await getGPTExplanation(props.word, scene)
-    console.log(result.data)
     let res_examples = getObjectFromString(result.data.choices[0].message.content)
     res_examples.examples.forEach(item => {
       examples.value.unshift(item)
