@@ -38,11 +38,21 @@ Settings:
 4.Here's an example for 'prohibit': const sceneExamples = { "examples": [{ "isFormal": true, "scene_desc": '政府公告', "example": { "content": "The city council has passed an ordinance that prohibits parking on Main Street during peak hours.", "trans_cn": "市政府通过了一项法令，禁止在主要街道上的高峰时段停车。" } }] };
 Start analysis, output: const sceneExamples="`
 
+const treePrompt = `You are an intelligent assistant aiding English vocabulary learning. Generate related content for a given word and return a JSON string:
+Settings:
+1.Output the word's Hypernyms, Co-Hyponyms, and Hyponyms.
+2.The example is for format reference only. 
+3.Output a structured JSON object conforming to the TypeScript interface: interface Node { word: string, trans_cn: string, children?: Node[] }
+4.Example for "purple": const wordTree = {"word": "color", "trans_cn": "颜色", "children": [{"word": "red", "trans_cn": "红色"}, {"word": "purple", "trans_cn": "紫色", "children": [{"word": "violet", "trans_cn": "紫罗兰色"}, {"word": "lavender", "trans_cn": "薰衣草色"}, {"word": "lilac", "trans_cn": "丁香色"}]}, {"word": "green", "trans_cn": "绿色"}]};
+Now analyze and output: const wordTree=
+`
+
 const promptMap = {
     'root': wordRootPrompt,
     'scene': scenePrompt,
     'dialog': dialogPrompt,
-    'formal': formalPrompt
+    'formal': formalPrompt,
+    'tree': treePrompt
 }
 
 
