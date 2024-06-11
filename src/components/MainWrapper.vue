@@ -75,9 +75,9 @@ function onRedirected() {
   <n-modal v-model:show="isShowHistoryModal" preset="card" style="width: 80vw;" size="small">
     <History @closeModal="onRedirected" />
   </n-modal>
-  <n-layout class="base no-select">
+  <n-layout class="base">
     <n-space id="main-wrapper" vertical>
-      <n-space data-tauri-drag-region id="header" justify="space-between">
+      <n-space class="dragger no-select" data-tauri-drag-region id="header" justify="space-between">
         <n-space id="btn-grp-left">
           <n-tooltip trigger="hover">
             <template #trigger>
@@ -168,6 +168,9 @@ function onRedirected() {
 </template>
 
 <style lang="scss" scoped>
+.dragger {
+  z-index: 10;
+}
 .base {
   width: 100vw;
   height: 100vh;
