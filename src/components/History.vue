@@ -12,7 +12,6 @@
               <n-text>{{ item.brief }}</n-text>
             </template>
             <n-text :depth="3">{{ getSimpleTime(item.latestTimestamp) }}</n-text>
-
           </n-thing>
           <template #suffix>
             <n-tag size="small" v-if="item.counts > 1">已查{{ item.counts }}次</n-tag>
@@ -29,7 +28,7 @@
 <script setup>
 import { getQueryHistory, clearQueryHistory } from "@/database/queryHistory.js";
 import { getSingleBrief } from '@/api/query.js'
-import { ref, onBeforeMount, defineEmits } from "vue";
+import { ref, onBeforeMount } from "vue";
 
 const queryHistory = ref()
 const wordsBrief = ref([])
@@ -60,7 +59,6 @@ onBeforeMount(async () => {
 import dayjs from 'dayjs'
 function getSimpleTime(timeStr) {
   return dayjs(timeStr).format('MM-DD HH:mm')
-
 }
 
 
