@@ -10,6 +10,7 @@ import { getCibaExplanation } from "@/api/query.js";
 import WordRoot from "@/components/WordRoot.vue";
 import Derives from "@/components/Derives.vue";
 import Scenes from "@/components/Scenes.vue";
+import Tree from "@/components/Tree.vue"
 
 const wordType = {
   "adv": "副词",
