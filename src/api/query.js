@@ -115,7 +115,7 @@ function getSingleBrief(word){
 
 function getCibaExplanation(word){
     return httpRequest({
-        url: 'https://www.iciba.com/_next/data/uGKktS1eP3HVzdLazkkJY/word.json',
+        url: 'https://www.iciba.com/_next/data/gCMOQ_c1uQ3vzVASlE8yE/word.json',
         query: {
             w: word
         }
